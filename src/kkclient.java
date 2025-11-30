@@ -13,7 +13,7 @@ public class kkclient {
     String host = DEFAULT_HOST;
     int port = DEFAULT_PORT;
     String role = "Client";
-
+//if condition
     if (args.length >= 1) host = args[0];
     if (args.length >= 2) {
       try { port = Integer.parseInt(args[1]); } catch (NumberFormatException ignored) {}
