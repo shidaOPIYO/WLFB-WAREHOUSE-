@@ -34,9 +34,9 @@ public class ActionServer {
     //Got to do this in the correct order with only four clients!  Can automate this...
     
     while (listening){
-      new ActionServerThread(ActionServerSocket.accept(), "ActionServerThread1", ourSharedActionStateObject).start();
-      new ActionServerThread(ActionServerSocket.accept(), "ActionServerThread2", ourSharedActionStateObject).start();
-      new ActionServerThread(ActionServerSocket.accept(), "ActionServerThread3", ourSharedActionStateObject).start();
+      new ActionServerThread(ActionServerSocket.accept(), "ActionServerCustomerAThread", ourSharedActionStateObject).start();
+      new ActionServerThread(ActionServerSocket.accept(), "ActionServerCustomerBThread", ourSharedActionStateObject).start();
+      new ActionServerThread(ActionServerSocket.accept(), "ActionServerSupplierThread", ourSharedActionStateObject).start();
       System.out.println("New " + ActionServerName + " thread started.");
     }
     ActionServerSocket.close();
