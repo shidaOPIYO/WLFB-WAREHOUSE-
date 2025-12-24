@@ -9,12 +9,14 @@ public class ActionServerThread extends Thread {
   private Socket actionSocket = null;
   private SharedActionState mySharedActionStateObject;
   private String myActionServerThreadName;
-  private double mySharedVariable;
+  
    
   //Setup the thread
+  //server assigns each thread the shared warehouse object,action socket and thread name
   	public ActionServerThread(Socket actionSocket, String ActionServerThreadName, SharedActionState SharedObject) {
 	
 //	  super(ActionServerThreadName);
+
 	  this.actionSocket = actionSocket;
 	  mySharedActionStateObject = SharedObject;
 	  myActionServerThreadName = ActionServerThreadName;
@@ -26,7 +28,8 @@ public class ActionServerThread extends Thread {
       PrintWriter out = new PrintWriter(actionSocket.getOutputStream(), true);
       BufferedReader in = new BufferedReader(new InputStreamReader(actionSocket.getInputStream()));
       String inputLine, outputLine;
-
+      
+      System.out.println("Successfully connected to WLFB warehouse. Type 'Menu' for functionalities");
       while ((inputLine = in.readLine()) != null) {
     	  // Get a lock first
     	  try { 

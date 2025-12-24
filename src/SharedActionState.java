@@ -3,6 +3,9 @@ import java.io.*;
 
 public class SharedActionState{
 	
+	private int apples;
+	private int oranges;
+	
 	private SharedActionState mySharedObj;
 	private String myThreadName;
 	private double mySharedVariable;
@@ -11,8 +14,10 @@ public class SharedActionState{
 
 // Constructor	
 	
-	SharedActionState(double SharedVariable) {
-		mySharedVariable = SharedVariable;
+	SharedActionState(int initialapples, int initialoranges) {
+		this.apples = initialapples;
+		this.oranges = initialoranges;
+		
 	}
 
 //Attempt to aquire a lock
@@ -49,6 +54,143 @@ public class SharedActionState{
     		System.out.println(myThreadName + " received "+ theInput);
     		String theOutput = null;
     		// Check what the client said
+    		
+    		//spilt the input into two part the command and quantity which are separated by space
+    		//the command is a string 
+    		//the quantity will be converted from string to integer
+    		String parts[] = theInput.trim().split("\\s+");
+    		
+    		if (parts.length == 0) {
+    			return "invalid input, empty command";
+    		}
+    		
+    		//The first part of the split input is the command
+    		String command = parts[0].toUpperCase();
+    		
+    		switch (command) {
+    			case "MENU":
+    				return "Functionalities : CHECK_STOCK | BUY_APPLES n | BUY_ORANGES n | ADD_APPLES n | ADD_ORANGES n | QUIT";
+    				
+    			case "CHECK_STOCK":
+    				return "STOCK: Apples = " + apples + "Oranges = " + oranges;
+    			
+    			case "BUY_APPLES":
+    				
+    			case "BUY_ORANGES":
+    				
+    			case "ADD_APPLES":
+    			
+    			case "ADD_ORANGES":
+    				
+    			case "QUIT":
+    				return "goodbye";
+    				
+    			default :
+    				return "Wrong input, Type Menu";
+
+    		}
+    		
+    		private String buyApples(String thread, String[] parts) {
+    			if (parts.length != 2 ){
+    				return "Invalid input: BUY_APPLES n (replace n with quantity you want";
+    			}
+    			
+    			try {
+    				int quantity = Integer.parseInt(parts[1]);
+    				if (quantity <= 0) {
+    					return "Invalid quantity, quantity should be greater than 0";
+    				}
+    				
+    				if (quantity > apples) {
+    					return "ERROR! Apples are not enough. Current Apples = " + apples;
+    				}else {
+    					apples -= quantity;
+    					return  quantity + " apples purchased successfully. Remaining apples= " + apples;
+    				}
+    				
+    				
+    			} catch (Exception e ) {
+    				return "ERROR! Invalid number";
+    			}
+    		}
+    		
+    		private String buyOranges(String thread, String[] parts) {
+    			if (parts.length != 2 ){
+    				return "Invalid input: BUY_ORANGES n (replace n with quantity you want";
+    			}
+    			
+    			try {
+    				int quantity = Integer.parseInt(parts[1]);
+    				if (quantity <= 0) {
+    					return "Invalid quantity, quantity should be greater than 0";
+    				}
+    				
+    				if (quantity > oranges) {
+    					return "ERROR! Oranges are not enough. Current Oranges = " + oranges;
+    				}else {
+    					oranges -= quantity;
+    					return  quantity + " oranges purchased successfully. Remaining oranges= " + oranges;
+    				}
+    				
+    				
+    			} catch (Exception e ) {
+    				return "ERROR! Invalid number";
+    			}
+    			
+    		}
+    		
+    		private String addApples(String thread, String[] parts) {
+    			if (parts.length != 2 ){
+    				return "Invalid input: ADD_APPLES n (replace n with quantity you want";
+    			}
+    			
+    			try {
+    				int quantity = Integer.parseInt(parts[1]);
+    				if (quantity <= 0) {
+    					return "Error! quanitity must be greater than zero!";
+    					
+    				}
+    				
+    				apples += quantity;
+    				
+    				return "OK: " + quantity + " apples added successfully. Current apples = " + apples ;  
+    				
+    				
+    			} catch (Exception e) {
+    				return "ERROR! Invalid input" ;
+    			}
+    			
+    			
+    		}
+    		
+    		private String addOranges(String thread, String[] parts) {
+    			if (parts.length != 2 ){
+    				return "Invalid input: ADD_ORANGES n (replace n with quantity you want";
+    			}
+    			
+    			try {
+    				int quantity = Integer.parseInt(parts[1]);
+    				if (quantity <= 0) {
+    					return "Error! quanitity must be greater than zero!";
+    					
+    				}
+    				
+    				ORANGES += quantity;
+    				
+    				return "OK: " + quantity + " oranges added successfully. Current oranges = " + oranges ;  
+    				
+    				
+    			} catch (Exception e) {
+    				return "ERROR! Invalid input" ;
+    			}
+    			
+    			
+    			
+    		}
+    		
+    		
+    		
+    		
     		if (theInput.equalsIgnoreCase("Do my action!")) {
     			//Correct request
     			if (myThreadName.equals("ActionServerThread1")) {

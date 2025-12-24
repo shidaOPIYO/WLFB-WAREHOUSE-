@@ -3,8 +3,6 @@ import java.io.*;
 
 
 
-
-
 public class ActionServer {
   public static void main(String[] args) throws IOException {
 
@@ -13,11 +11,15 @@ public class ActionServer {
     String ActionServerName = "ActionServer";
     int ActionServerNumber = 4545;
     
-    double SharedVariable = 100;
-
-    //Create the shared object in the global scope...
+    //initial warehouse stocks
+    int initialApples = 1000;
+    int initialOranges = 1000;
     
-    SharedActionState ourSharedActionStateObject = new SharedActionState(SharedVariable);
+  
+    //Create the shared object in the global scope... 
+    //Creates the shared warehouse state
+    
+    SharedActionState ourSharedActionStateObject = new SharedActionState(initialApples, initialOranges);
         
     // Make the server socket
 
@@ -35,7 +37,6 @@ public class ActionServer {
       new ActionServerThread(ActionServerSocket.accept(), "ActionServerThread1", ourSharedActionStateObject).start();
       new ActionServerThread(ActionServerSocket.accept(), "ActionServerThread2", ourSharedActionStateObject).start();
       new ActionServerThread(ActionServerSocket.accept(), "ActionServerThread3", ourSharedActionStateObject).start();
-      new ActionServerThread(ActionServerSocket.accept(), "ActionServerThread4", ourSharedActionStateObject).start();
       System.out.println("New " + ActionServerName + " thread started.");
     }
     ActionServerSocket.close();
