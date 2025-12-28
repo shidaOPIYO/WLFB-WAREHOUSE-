@@ -10,7 +10,7 @@ public class SharedActionState{
 	private boolean accessing=false; // true a thread has a lock, false otherwise
 	private int threadsWaiting=0; // number of waiting writers
 
-// Constructor	
+// Constructor	assigns the default number of apples and oranges 
 	
 	SharedActionState(int initialapples, int initialoranges) {
 		this.apples = initialapples;
@@ -66,7 +66,7 @@ public class SharedActionState{
     		String command = parts[0].toUpperCase();
     		
     		
-    		//Program diplay functionalities depending on whether its the customer or supplier 
+    		//Program diplay functionalities depending on whether its the customer or supplier thread
     		//since they have different operational functions
     		switch (command) {
     			case "MENU":
@@ -108,9 +108,11 @@ public class SharedActionState{
  
     	}
 	
+	
+	//method reduces number of apples in stock in the warehouse after being purchased
 	private String buyApples(String thread, String[] parts) {
 		if (parts.length != 2 ){
-			return "Invalid input: BUY_APPLES n (replace n with quantity you want";
+			return "Invalid input: BUY_APPLES n (replace n with quantity you want)";
 		}
 		
 		try {
@@ -132,9 +134,10 @@ public class SharedActionState{
 		}
 	}
 	
+	//methods reduces number of oranges in stock in the warehouse after being purchased
 	private String buyOranges(String thread, String[] parts) {
 		if (parts.length != 2 ){
-			return "Invalid input: BUY_ORANGES n (replace n with quantity you want";
+			return "Invalid input: BUY_ORANGES n (replace n with quantity you want)";
 		}
 		
 		try {
@@ -157,9 +160,10 @@ public class SharedActionState{
 		
 	}
 	
+	//method adds number of apples in stock in the warehouse
 	private String addApples(String thread, String[] parts) {
 		if (parts.length != 2 ){
-			return "Invalid input: ADD_APPLES n (replace n with quantity you want";
+			return "Invalid input: ADD_APPLES n (replace n with quantity you want)";
 		}
 		
 		try {
@@ -181,9 +185,10 @@ public class SharedActionState{
 		
 	}
 	
+	//method number of oranges in stock in the warehouse
 	private String addOranges(String thread, String[] parts) {
 		if (parts.length != 2 ){
-			return "Invalid input: ADD_ORANGES n (replace n with quantity you want";
+			return "Invalid input: ADD_ORANGES n (replace n with quantity you want)";
 		}
 		
 		try {
